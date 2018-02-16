@@ -11,15 +11,18 @@ ARG shell
 RUN apt-get -y update
 RUN apt-get install -y zsh curl screen tree sudo ssh synaptic vim
 
+# Python.
+RUN apt-get install -y python-dev python-pip python3-dev python3-pip
+RUN pip install --upgrade pip
+RUN pip3 install --upgrade pip
+
 # Neovim
 RUN apt-get install -y software-properties-common
 RUN add-apt-repository -y ppa:neovim-ppa/unstable
 RUN apt-get -y update
 RUN apt-get install -y neovim
-
-RUN apt-get install -y python-dev python-pip python3-dev python3-pip
-RUN sudo pip install neovim
-RUN sudo pip3 install neovim
+RUN pip install neovim
+RUN pip3 install neovim
 
 # Latest X11 / mesa GL
 RUN apt-get install -y\
@@ -56,6 +59,8 @@ RUN apt-get install -y \
 RUN apt-get install -y libeigen3-dev
 RUN ln -s /usr/include/eigen3/Eigen /usr/include/Eigen
 
+# Gaussian process package.
+RUN pip install GPy
 
 # Make SSH available
 EXPOSE 22
