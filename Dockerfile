@@ -55,9 +55,12 @@ RUN apt-get install -y \
   ros-indigo-soem ros-indigo-ros-control ros-indigo-socketcan-interface \
   ros-indigo-moveit ros-indigo-ur-modern-driver ros-indigo-geometry2 \
   ros-indigo-robot-localization ros-indigo-hector-gazebo \
-  ros-indigo-gazebo-ros-control
-RUN apt-get install -y libeigen3-dev
+  ros-indigo-gazebo-ros-control libeigen3-dev
+
+# Make symlinks to find header files.
 RUN ln -s /usr/include/eigen3/Eigen /usr/include/Eigen
+RUN ln -s /usr/include/gazebo-2.2/gazebo /usr/include/gazebo
+RUN ln -s /usr/include/sdformat-1.4/sdf /usr/include/sdf
 
 # Gaussian process package.
 RUN pip install GPy
@@ -67,6 +70,9 @@ EXPOSE 22
 
 # Mount the user's home directory
 VOLUME "${home}"
+
+# Mount USB devices.
+# VOLUME "/dev/bus/usb"
 
 # Clone user into docker image and set up X11 sharing 
 RUN \
