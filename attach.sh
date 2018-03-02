@@ -6,7 +6,10 @@ if ! [ -f image_name.txt ]; then
   exit 1
 fi
 
+# Get the name of the container image.
 image=$(cat image_name.txt)
+
+# Find the running container.
 container=$(docker ps --filter ancestor=$image --latest --quiet)
 
 # Attach to the container.
