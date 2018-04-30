@@ -65,16 +65,16 @@ RUN ln -s /usr/include/sdformat-1.4/sdf /usr/include/sdf
 # Gaussian process package.
 RUN pip install GPy
 
+# Set up for networking with the Thing.
+RUN echo 191.168.131.1 cpr-tor11-01 >> /etc/hosts
+
 # Make SSH available
 EXPOSE 22
 
 # Mount the user's home directory
 VOLUME "${home}"
 
-# Mount USB devices.
-# VOLUME "/dev/bus/usb"
-
-# Clone user into docker image and set up X11 sharing 
+# Clone user into docker image and set up X11 sharing
 RUN \
   echo "${user}:x:${uid}:${uid}:${user},,,:${home}:${shell}" >> /etc/passwd && \
   echo "${user}:x:${uid}:" >> /etc/group && \
