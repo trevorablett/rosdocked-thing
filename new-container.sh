@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# TODO we may want to rerun an existing containter, if this is possible
+
 # Check that file containing the image name exists.
 if ! [ -f image_name.txt ]; then
   echo "Could not find image_name.txt."
@@ -29,4 +31,5 @@ docker run\
   -v "$HOME:$HOME:rw"\
   -v "/home/linuxbrew:/home/linuxbrew:ro"\
   -v "/tmp/.X11-unix:/tmp/.X11-unix:rw"\
+  --add-host cpr-tor11-01:191.168.131.1\
   -it $(cat image_name.txt) $SHELL
