@@ -65,9 +65,6 @@ RUN ln -s /usr/include/sdformat-1.4/sdf /usr/include/sdf
 # Gaussian process package.
 RUN pip install GPy
 
-# Set up for networking with the Thing.
-# RUN echo 191.168.131.1 cpr-tor11-01 >> /etc/hosts
-
 # Make SSH available
 EXPOSE 22
 
