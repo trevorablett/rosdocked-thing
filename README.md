@@ -23,8 +23,15 @@ original repository may be found [here](https://github.com/jbohren/rosdocked).
 ## Usage
 * The name of your image must be in a file called `image_name.txt`.
 * `build-image.sh` builds the image named in `image_name.txt`, following the
-  directions laid out in the `Dockerfile`.
+  directions laid out in the `Dockerfile`. You need to run this to initially
+  build the image and rebuild it if you make changes to the Dockerfile.
 * `new-container.sh` creates a new container from the latest image and
   automatically attaches to it. The container shares your home directory.
 * `restart-container.sh` restarts an existing container that has been stopped.
 * `attach-to-container.sh` attaches to an already-running container.
+
+## Useful Docker Commands
+* `docker ps`: List running containers. If you see your container running here,
+  you can attach to it.
+* `docker ps -a`: List all containers (running and stopped).
+* `docker images`: List docker images.
