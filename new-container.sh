@@ -19,6 +19,10 @@ set -e
 # --privileged and -v /dev/bus/usb:/dev/bus/usb are meant to give access to USB
 # devices. See
 # https://stackoverflow.com/questions/24225647/docker-any-way-to-give-access-to-host-usb-or-serial-device
+#
+# Note: /dev/bus/usb doesn't actually exist on macOS, if you're bold enough to
+# try this on one. I'm not sure what the alternative is (or if one is needed).
+# Good luck.
 docker run\
   --net=host\
   -e SHELL\
@@ -29,6 +33,5 @@ docker run\
   --device /dev/dri\
   -v "/dev/bus/usb:/dev/bus/usb"\
   -v "$HOME:$HOME:rw"\
-  -v "/home/linuxbrew:/home/linuxbrew:ro"\
   -v "/tmp/.X11-unix:/tmp/.X11-unix:rw"\
   -it $(cat image_name.txt) $SHELL
