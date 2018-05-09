@@ -14,6 +14,11 @@ and rebuild.
 For more info on Docker see here:
 https://docs.docker.com/engine/installation/linux/ubuntulinux/
 
+## A Note on macOS
+It is not immediately obvious how to get this working on a Mac. There are
+definitely some differences from Linux, and [this post](http://qr.ae/TUTszl)
+may provide a reasonable starting point.
+
 ## Thing
 
 This is a fork specifically designed for running the
