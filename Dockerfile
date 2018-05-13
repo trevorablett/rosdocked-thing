@@ -16,6 +16,14 @@ RUN apt-get install -y python-dev python-pip python3-dev python3-pip
 RUN pip install --upgrade pip
 RUN pip3 install --upgrade pip
 
+# Neovim
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository -y ppa:neovim-ppa/unstable
+RUN apt-get -y update
+RUN apt-get install -y neovim
+RUN pip install neovim
+RUN pip3 install neovim
+
 # Latest X11 / mesa GL
 RUN apt-get install -y\
   xserver-xorg-dev-lts-trusty\
@@ -53,6 +61,9 @@ RUN apt-get install -y \
 RUN ln -s /usr/include/eigen3/Eigen /usr/include/Eigen
 RUN ln -s /usr/include/gazebo-2.2/gazebo /usr/include/gazebo
 RUN ln -s /usr/include/sdformat-1.4/sdf /usr/include/sdf
+
+# Gaussian process package.
+RUN pip install GPy
 
 # Make SSH available
 EXPOSE 22
