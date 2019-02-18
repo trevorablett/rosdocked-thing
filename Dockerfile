@@ -1,4 +1,4 @@
-FROM ros:indigo
+FROM lindwaltz/ros-indigo-desktop-full-nvidia
 
 # Arguments
 ARG user
@@ -11,33 +11,6 @@ ARG shell
 RUN apt-get -y update
 RUN apt-get install -y zsh curl screen tree sudo ssh synaptic vim
 
-# Python.
-RUN apt-get install -y python-dev python-pip python3-dev python3-pip
-RUN pip install --upgrade pip
-RUN pip3 install --upgrade pip
-
-# Latest X11 / mesa GL
-RUN apt-get install -y\
-  xserver-xorg-dev-lts-trusty\
-  libegl1-mesa-dev-lts-trusty\
-  libgl1-mesa-dev-lts-trusty\
-  libgbm-dev-lts-trusty\
-  mesa-common-dev-lts-trusty\
-  libgles2-mesa-lts-trusty\
-  libwayland-egl1-mesa-lts-trusty\
-  libopenvg1-mesa
-
-# Dependencies required to build rviz
-RUN apt-get install -y\
-  qt4-dev-tools\
-  libqt5core5a libqt5dbus5 libqt5gui5 libwayland-client0\
-  libwayland-server0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1\
-  libxcb-render-util0 libxcb-util0 libxcb-xkb1 libxkbcommon-x11-0\
-  libxkbcommon0
-
-# The rest of ROS-desktop
-RUN apt-get install -y ros-indigo-desktop-full
-
 # Additional development tools
 RUN apt-get install -y x11-apps python-pip build-essential
 RUN pip install catkin_tools
@@ -48,6 +21,7 @@ RUN apt-get install -y \
   ros-indigo-moveit ros-indigo-ur-modern-driver ros-indigo-geometry2 \
   ros-indigo-robot-localization ros-indigo-hector-gazebo \
   ros-indigo-gazebo-ros-control libeigen3-dev
+
 
 # Make symlinks to find header files.
 RUN ln -s /usr/include/eigen3/Eigen /usr/include/Eigen
@@ -74,3 +48,6 @@ ENV QT_X11_NO_MITSHM=1
 ENV CATKIN_TOPLEVEL_WS="${workspace}/devel"
 # Switch to the workspace
 WORKDIR ${workspace}
+
+# For ROS, add in bashrc lines
+RUN echo "\n#ROS\nsource /opt/ros/indigo/setup.bash" >> /root/.bashrc

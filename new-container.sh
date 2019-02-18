@@ -23,7 +23,12 @@ set -e
 # Note: /dev/bus/usb doesn't actually exist on macOS, if you're bold enough to
 # try this on one. I'm not sure what the alternative is (or if one is needed).
 # Good luck.
+
+# this is apparently dangerous, according to http://wiki.ros.org/docker/Tutorials/GUI
+xhost +local:root
+
 docker run\
+  --runtime=nvidia\
   --net=host\
   -e SHELL\
   -e DISPLAY\
@@ -35,3 +40,6 @@ docker run\
   -v "$HOME:$HOME:rw"\
   -v "/tmp/.X11-unix:/tmp/.X11-unix:rw"\
   -it $(cat image_name.txt) $SHELL
+
+# this apparently fixes the vulnerability listed above
+xhost -local:root
