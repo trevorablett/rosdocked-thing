@@ -14,6 +14,9 @@ and rebuild.
 For more info on Docker see here:
 https://docs.docker.com/engine/installation/linux/ubuntulinux/
 
+## A note about Nvidia compatibility
+This has been modified from Adam's original repository to work with Nvidia drivers (i.e. now you can view gazebo/rviz). This is based on adding a [custom ROS/Nvidia base image](https://hub.docker.com/r/lindwaltz/ros-indigo-desktop-full-nvidia/). This base image also requires [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker) to be installed.
+
 ## A Note on macOS
 It is not immediately obvious how to get this working on a Mac. There are
 definitely some differences from Linux, and [this post](http://qr.ae/TUTszl)
