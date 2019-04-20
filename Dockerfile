@@ -20,8 +20,7 @@ RUN apt-get install -y \
   ros-indigo-soem ros-indigo-ros-control ros-indigo-socketcan-interface \
   ros-indigo-moveit ros-indigo-ur-modern-driver ros-indigo-geometry2 \
   ros-indigo-robot-localization ros-indigo-hector-gazebo \
-  ros-indigo-gazebo-ros-control libeigen3-dev
-
+  ros-indigo-gazebo-ros-control ros-indigo-navigation libeigen3-dev
 
 # Make symlinks to find header files.
 RUN ln -s /usr/include/eigen3/Eigen /usr/include/Eigen
@@ -51,3 +50,19 @@ WORKDIR ${workspace}
 
 # For ROS, add in bashrc lines
 RUN echo "\n#ROS\nsource /opt/ros/indigo/setup.bash" >> /root/.bashrc
+
+# TEMP MORE STUFF TO ADD, DELETE THESE LINES AFTER
+# somehow set HOME to be the same as the current users home, NOT root (i.e. the home of sudo)
+# LD_LIBRARY_PATH=/home/tablett/.local/share/Steam/steamapps/common/SteamVR/bin/linux64:.
+# libegl1-mesa-dev, libsdl2-dev
+
+# Lines for testing VR through docker, but this basically didn't work
+# VR dependencies
+# pip dependencies
+# RUN pip install openvr transforms3d
+
+# linux dependencies
+# RUN apt-get install -y software-properties-common
+# RUN add-apt-repository ppa:ubuntu-toolchain-r/test -y
+# RUN apt-get update
+# RUN apt-get install -y libstdc++6
