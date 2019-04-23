@@ -11,11 +11,25 @@ pushd `dirname $0` > /dev/null
 SCRIPTPATH=`pwd`
 popd > /dev/null
 
-# Build the docker image
+# since this script needs to be run with sudo, allow manual setting of these variables
+DOCKER_USER=trevor
+DOCKER_UID=1000
+DOCKER_HOME=/home/trevor
+
 docker build\
-  --build-arg user=$USER\
-  --build-arg uid=$UID\
-  --build-arg home=$HOME\
+  --build-arg user=$DOCKER_USER\
+  --build-arg uid=$DOCKER_UID\
+  --build-arg home=$DOCKER_HOME\
   --build-arg workspace=$SCRIPTPATH\
   --build-arg shell=$SHELL\
   -t $(cat image_name.txt) .
+
+
+# Build the docker image
+# docker build\
+#   --build-arg user=$USER\
+#   --build-arg uid=$UID\
+#   --build-arg home=$HOME\
+#   --build-arg workspace=$SCRIPTPATH\
+#   --build-arg shell=$SHELL\
+#   -t $(cat image_name.txt) .

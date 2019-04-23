@@ -49,7 +49,7 @@ ENV CATKIN_TOPLEVEL_WS="${workspace}/devel"
 WORKDIR ${workspace}
 
 # For ROS, add in bashrc lines
-RUN echo "\n#ROS\nsource /opt/ros/indigo/setup.bash" >> /root/.bashrc
+# RUN echo "\n#ROS\nsource /opt/ros/indigo/setup.bash" >> /root/.bashrc
 
 # TEMP MORE STUFF TO ADD, DELETE THESE LINES AFTER
 # somehow set HOME to be the same as the current users home, NOT root (i.e. the home of sudo)

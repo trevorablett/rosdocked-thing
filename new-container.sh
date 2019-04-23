@@ -28,6 +28,7 @@ set -e
 xhost +local:root
 
 docker run\
+  --user=trevor:trevor\
   --runtime=nvidia\
   --net=host\
   -e SHELL\
@@ -39,6 +40,7 @@ docker run\
   -v "/dev/bus/usb:/dev/bus/usb"\
   -v "$HOME:$HOME:rw"\
   -v "/tmp/.X11-unix:/tmp/.X11-unix:rw"\
+  -v "/root/.config:/root/.config:ro"\
   -it $(cat image_name.txt) $SHELL
 
 # this apparently fixes the vulnerability listed above
