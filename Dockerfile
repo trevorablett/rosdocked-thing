@@ -41,6 +41,12 @@ RUN \
   echo "${user} ALL=(ALL) NOPASSWD: ALL" > "/etc/sudoers.d/${user}" && \
   chmod 0440 "/etc/sudoers.d/${user}"
 
+
+# Install custom python modules -- if more are added, use a requirements.txt file instead
+ADD /python-packages/liegroups /python-packages/liegroups
+WORKDIR /python-packages/liegroups
+RUN pip install -e .
+
 # Switch to user
 USER "${user}"
 # This is required for sharing Xauthority
@@ -50,6 +56,8 @@ ENV CATKIN_TOPLEVEL_WS="${workspace}/devel"
 WORKDIR ${workspace}
 
 # For ROS, add in bashrc lines
+# Removed, since now that we're using an existing user (and hence their .bashrc file as well),
+# their own .bashrc file may already include this (and we shouldn't modify it anyways)
 # RUN echo "\n#ROS\nsource /opt/ros/indigo/setup.bash" >> /root/.bashrc
 
 # TEMP MORE STUFF TO ADD, DELETE THESE LINES AFTER
