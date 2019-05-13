@@ -20,7 +20,8 @@ RUN apt-get install -y \
   ros-indigo-soem ros-indigo-ros-control ros-indigo-socketcan-interface \
   ros-indigo-moveit ros-indigo-ur-modern-driver ros-indigo-geometry2 \
   ros-indigo-robot-localization ros-indigo-hector-gazebo \
-  ros-indigo-gazebo-ros-control ros-indigo-navigation libeigen3-dev
+  ros-indigo-gazebo-ros-control ros-indigo-navigation libeigen3-dev \
+  python-h5py
 
 # Make symlinks to find header files.
 RUN ln -s /usr/include/eigen3/Eigen /usr/include/Eigen
