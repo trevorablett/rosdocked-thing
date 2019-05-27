@@ -17,6 +17,23 @@ https://docs.docker.com/engine/installation/linux/ubuntulinux/
 ## A note about Nvidia compatibility
 This has been modified from Adam's original repository to work with Nvidia drivers (i.e. now you can view gazebo/rviz). This is based on adding a [custom ROS/Nvidia base image](https://hub.docker.com/r/lindwaltz/ros-indigo-desktop-full-nvidia/). This base image also requires [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker) to be installed.
 
+## Other additions
+This branch has now been updated so that the running user does not have permanent sudo priveleges (e.g. if you're making directories, they're no longer all owned by root). To use this branch properly, you must change the "user" variables in both build-image.sh and new-container.sh.
+
+Since this will cause your .bashrc file in the running container to be shared with your regular .bashrc file, you may want to add something like this to your .bashrc file:
+
+```
+# get currently running ubuntu version
+ubuntu_version=`lsb_release -rs`
+
+# ROS
+if [[ $ubuntu_version == "18.04" ]]; then
+   source /opt/ros/melodic/setup.bash
+elif [[ $ubuntu_version == "14.04" ]]; then
+   source /opt/ros/indigo/setup.bash
+fi
+```
+
 ## A Note on macOS
 It is not immediately obvious how to get this working on a Mac. There are
 definitely some differences from Linux, and [this post](http://qr.ae/TUTszl)
