@@ -1,3 +1,6 @@
 [submodule "python-packages/liegroups"]
 	path = python-packages/liegroups
 	url = https://github.com/utiasSTARS/liegroups
+[submodule "dependencies/libfreenect2"]
+	path = dependencies/libfreenect2
+	url = https://github.com/OpenKinect/libfreenect2

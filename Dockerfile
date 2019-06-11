@@ -47,6 +47,30 @@ ADD /python-packages/liegroups /python-packages/liegroups
 WORKDIR /python-packages/liegroups
 RUN pip install -e .
 
+# libfreenect2 - see https://github.com/OpenKinect/libfreenect2
+ADD dependencies/libfreenect2/ /dependencies/libfreenect2
+WORKDIR /dependencies/libfreenect2/depends
+RUN ./download_debs_trusty.sh
+RUN apt-get install -y cmake pkg-config
+RUN dpkg -i debs/libusb*deb
+RUN apt-get install -y libturbojpeg libjpeg-turbo8-dev
+RUN dpkg -i debs/libglfw3*deb; sudo apt-get install -f
+WORKDIR /dependencies/libfreenect2
+RUN mkdir build
+WORKDIR /dependencies/libfreenect2/build
+RUN cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/freenect2
+RUN make
+RUN make install
+
+# Other kinect dependencies
+# there's an error with apt get for ros packages for some reason that wasn't
+# happening before...probably needs more investigation
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F42ED6FBAB17C654
+RUN apt-get update
+RUN apt-get install -y \
+	ros-indigo-visp-hand2eye-calibration ros-indigo-aruco-ros
+
+
 # Switch to user
 USER "${user}"
 # This is required for sharing Xauthority
