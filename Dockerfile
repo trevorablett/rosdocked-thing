@@ -34,6 +34,9 @@ EXPOSE 22
 # Mount the user's home directory
 VOLUME "${home}"
 
+# Mount anything that's mounted in media (e.g. other hard drives)
+VOLUME "/media"
+
 # Clone user into docker image and set up X11 sharing
 RUN \
   echo "${user}:x:${uid}:${uid}:${user},,,:${home}:${shell}" >> /etc/passwd && \

@@ -39,6 +39,7 @@ docker run\
   --device /dev/dri\
   -v "/dev/bus/usb:/dev/bus/usb"\
   -v "$HOME:$HOME:rw"\
+  -v "/media:/media:rw"\
   -v "/tmp/.X11-unix:/tmp/.X11-unix:rw"\
   -v "/root/.config:/root/.config:ro"\
   -it $(cat image_name.txt) $SHELL
