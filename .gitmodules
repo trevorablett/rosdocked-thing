@@ -4,3 +4,6 @@
 [submodule "dependencies/libfreenect2"]
 	path = dependencies/libfreenect2
 	url = https://github.com/OpenKinect/libfreenect2
+[submodule "python-packages/manipulator-learning"]
+	path = python-packages/manipulator-learning
+	url = https://github.com/utiasSTARS/manipulator-learning

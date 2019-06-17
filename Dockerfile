@@ -49,6 +49,10 @@ RUN \
 ADD /python-packages/liegroups /python-packages/liegroups
 WORKDIR /python-packages/liegroups
 RUN pip install -e .
+ADD /python-packages/manipulator-learning /python-packages/manipulator-learning
+WORKDIR /python-packages/manipulator-learning
+RUN pip install -e .
+
 
 # libfreenect2 - see https://github.com/OpenKinect/libfreenect2
 ADD dependencies/libfreenect2/ /dependencies/libfreenect2
