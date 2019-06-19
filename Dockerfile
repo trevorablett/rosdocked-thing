@@ -12,8 +12,16 @@ RUN apt-get -y update
 RUN apt-get install -y zsh curl screen tree sudo ssh synaptic vim
 
 # Additional development tools
-RUN apt-get install -y x11-apps python-pip build-essential
+RUN apt-get install -y x11-apps build-essential
+RUN wget https://bootstrap.pypa.io/get-pip.py
+RUN python get-pip.py
+RUN pip install --upgrade pip
 RUN pip install catkin_tools
+
+# there's an error with apt get for ros packages for some reason that wasn't
+# happening before...probably needs more investigation
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F42ED6FBAB17C654
+RUN apt-get update
 
 # Thing dependencies.
 RUN apt-get install -y \
@@ -51,7 +59,7 @@ WORKDIR /python-packages/liegroups
 RUN pip install -e .
 ADD /python-packages/manipulator-learning /python-packages/manipulator-learning
 WORKDIR /python-packages/manipulator-learning
-RUN pip install -e .
+RUN pip install -e . 
 
 
 # libfreenect2 - see https://github.com/OpenKinect/libfreenect2
@@ -70,10 +78,6 @@ RUN make
 RUN make install
 
 # Other kinect dependencies
-# there's an error with apt get for ros packages for some reason that wasn't
-# happening before...probably needs more investigation
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F42ED6FBAB17C654
-RUN apt-get update
 RUN apt-get install -y \
 	ros-indigo-visp-hand2eye-calibration ros-indigo-aruco-ros
 
