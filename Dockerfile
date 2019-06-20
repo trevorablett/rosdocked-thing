@@ -54,6 +54,8 @@ RUN \
 
 
 # Install custom python modules -- if more are added, use a requirements.txt file instead
+RUN pip install --ignore-installed numpy
+RUN pip install torch torchvision pybullet ipython
 ADD /python-packages/liegroups /python-packages/liegroups
 WORKDIR /python-packages/liegroups
 RUN pip install -e .
