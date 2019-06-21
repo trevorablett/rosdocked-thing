@@ -16,7 +16,7 @@ RUN apt-get install -y x11-apps build-essential
 RUN wget https://bootstrap.pypa.io/get-pip.py
 RUN python get-pip.py
 RUN pip install --upgrade pip
-RUN pip install catkin_tools
+RUN pip install catkin_tools scipy
 
 # there's an error with apt get for ros packages for some reason that wasn't
 # happening before...probably needs more investigation
