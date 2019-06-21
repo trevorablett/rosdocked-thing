@@ -24,11 +24,14 @@ set -e
 # try this on one. I'm not sure what the alternative is (or if one is needed).
 # Good luck.
 
+# The groupadd line is specifically for the monolith group
+
 # this is apparently dangerous, according to http://wiki.ros.org/docker/Tutorials/GUI
 xhost +local:root
 
 docker run\
-  --user=trevor:trevor\
+  --user=tablett:tablett\
+  --group-add 1004\
   --runtime=nvidia\
   --net=host\
   -e SHELL\

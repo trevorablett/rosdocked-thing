@@ -12,9 +12,9 @@ SCRIPTPATH=`pwd`
 popd > /dev/null
 
 # since this script needs to be run with sudo, allow manual setting of these variables
-DOCKER_USER=trevor
-DOCKER_UID=1000
-DOCKER_HOME=/home/trevor
+DOCKER_USER=tablett
+DOCKER_UID=1010
+DOCKER_HOME=/home/tablett
 
 docker build\
   --build-arg user=$DOCKER_USER\
