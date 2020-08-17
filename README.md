@@ -15,7 +15,29 @@ For more info on Docker see here:
 https://docs.docker.com/engine/installation/linux/ubuntulinux/
 
 ## A note about Nvidia compatibility
-This has been modified from Adam's original repository to work with Nvidia drivers (i.e. now you can view gazebo/rviz). This is based on adding a [custom ROS/Nvidia base image](https://hub.docker.com/r/lindwaltz/ros-indigo-desktop-full-nvidia/). This base image also requires [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker) to be installed.
+This has been modified from Adam's original repository to work with Nvidia drivers (i.e. now you can view gazebo/rviz). This is based on adding a [custom ROS/Nvidia base image](https://hub.docker.com/r/lindwaltz/ros-indigo-desktop-full-nvidia/). 
+
+To use nvidia, you need to install nvidia support for docker:
+
+1. Add the repository following [these instructions](https://nvidia.github.io/nvidia-container-runtime/).
+2. Install: `sudo apt install nvidia-container-runtime`
+3. Add the runtime to docker:
+```
+sudo tee /etc/docker/daemon.json <<EOF
+{
+    "runtimes": {
+        "nvidia": {
+            "path": "/usr/bin/nvidia-container-runtime",
+            "runtimeArgs": []
+        }
+    }
+}
+EOF
+sudo pkill -SIGHUP dockerd
+```
+4. Verify that nvidia has been added to runtime list with `docker info|grep -i runtime`.
+
+This base image also requires [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker) to be installed.
 
 ## Other additions
 This branch has now been updated so that the running user does not have permanent sudo priveleges (e.g. if you're making directories, they're no longer all owned by root). To use this branch properly, you must change the "user" variables in both build-image.sh and new-container.sh.
